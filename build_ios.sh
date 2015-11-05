@@ -228,16 +228,16 @@ for iver in $build_versions; do
 				export OPTZFLAGS="--enable-asm --disable-armv5te --disable-armv6 --disable-armv6t2"
 				case $iarch in
 					armv7)
-						export EXCFLAGS="-mfpu=neon -mfloat-abi=hard" # "-mcpu= or -march=" set by "--cpu="
+						export EXCFLAGS="-mfpu=neon -mfloat-abi=hard -fembed-bitcode" # "-mcpu= or -march=" set by "--cpu="
 						export ADVANCED="--arch=arm --cpu=cortex-a8"
 						;;
 					armv7s)
-						export EXCFLAGS="-mfpu=neon -mfloat-abi=hard"
+						export EXCFLAGS="-mfpu=neon -mfloat-abi=hard -fembed-bitcode"
 						export ADVANCED="--arch=arm --cpu=cortex-a9"
 						;;
 					arm64)
 						export OPTZFLAGS="--disable-asm"
-						export EXCFLAGS="-mfpu=vfpv4 -mfloat-abi=hard"
+						export EXCFLAGS="-mfpu=vfpv4 -mfloat-abi=hard -fembed-bitcode"
 						export ADVANCED="--arch=arm"
 						export SDKVERSIONMIN=7.0.0
 						;;
@@ -246,7 +246,7 @@ for iver in $build_versions; do
 			i386|x86_64)
 				export SDKRoot="$SDKRootSimulator"
 				export OPTZFLAGS="--disable-asm"
-				export EXCFLAGS=
+				export EXCFLAGS="-fembed-bitcode"
 				export ADVANCED="--arch=$iarch --cpu=$iarch"
 				;;
 		esac
